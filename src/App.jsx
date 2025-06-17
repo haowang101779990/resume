@@ -1,37 +1,70 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react'
+import avatarImg from './assets/IMG_5473.jpg'
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import ImageIcon from '@mui/icons-material/Image';
+import WorkIcon from '@mui/icons-material/Work';
+import MailIcon from '@mui/icons-material/Mail';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import {MainContent} from './components/MainContent/MainContent.jsx'
+import './App.scss'
 
-function App() {
-  const [count, setCount] = useState(0)
+function MyAvatar(){
+  return (
+    <img src={avatarImg} alt="avatar" className="avatar"/>
+  )
+}
 
+
+
+function Contact(){
   return (
     <>
-      <h1 class="text-3xl font-bold underline">
-        Hello world!
-      </h1>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <MailIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Email" secondary="tomwangoeuf@126.com" />
+      </ListItem>
+      
+    </List>
     </>
+  );
+}
+
+
+function App() {
+ 
+  const THEME = createTheme({
+   typography: {
+    "fontFamily": "lora"
+   }
+});
+
+  return (
+    <ThemeProvider theme={THEME}>
+    <div className="app-container flex flex-row">
+      <div className="left basis-1/4">
+        <div>
+          <MyAvatar/>
+        </div>
+        <div>
+          <Contact/>
+        </div>
+          
+      </div>
+      <div className="right">
+          <MainContent/>
+      </div>
+     
+    </div>
+    </ThemeProvider>
   )
 }
 
